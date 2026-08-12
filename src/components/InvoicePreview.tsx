@@ -210,7 +210,7 @@ export const InvoicePreview: React.FC<InvoicePreviewProps> = ({ invoice, company
             </div>
 
             {/* Bottom Total Section matching sample */}
-            <div className="flex justify-between items-end mt-4 pt-2">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 sm:gap-0 mt-4 pt-2">
               <div className="text-xs font-sans text-slate-600 space-y-1">
                 {invoice.notes && (
                   <div className="font-bold text-[#0f3458] tracking-wide text-xs sm:text-sm uppercase">
@@ -220,12 +220,12 @@ export const InvoicePreview: React.FC<InvoicePreviewProps> = ({ invoice, company
               </div>
 
               {/* Big Gross Total Display */}
-              <div className="inline-flex border-2 border-[#0f3458] bg-white items-stretch h-12 overflow-hidden">
-                <div className="bg-slate-50 text-[#0f3458] font-bold text-xs sm:text-sm px-4 flex flex-col items-center justify-center text-center uppercase tracking-wider border-r-2 border-[#0f3458] font-sans whitespace-nowrap">
+              <div className="self-end inline-flex border-2 border-[#0f3458] bg-white items-stretch h-10 sm:h-12 overflow-hidden shrink-0 max-w-full">
+                <div className="bg-slate-50 text-[#0f3458] font-bold text-[10px] sm:text-sm px-2.5 sm:px-4 flex flex-col items-center justify-center text-center uppercase tracking-wider border-r-2 border-[#0f3458] font-sans whitespace-nowrap">
                   <span className="leading-none">GROSS TOTAL</span>
-                  {invoice.discount > 0 && <span className="text-[10px] text-slate-500 mt-0.5 leading-none">(NET)</span>}
+                  {invoice.discount > 0 && <span className="text-[9px] sm:text-[10px] text-slate-500 mt-0.5 leading-none">(NET)</span>}
                 </div>
-                <div className="text-2xl sm:text-3xl font-extrabold text-[#0f3458] px-6 flex items-center justify-center font-sans tracking-tight whitespace-nowrap leading-none">
+                <div className="text-lg sm:text-2xl md:text-3xl font-extrabold text-[#0f3458] px-3 sm:px-6 flex items-center justify-center font-sans tracking-tight whitespace-nowrap leading-none">
                   {formatAmount(invoice.grossTotal)}
                 </div>
               </div>
