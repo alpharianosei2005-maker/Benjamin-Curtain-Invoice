@@ -230,15 +230,19 @@ export const InvoicePreview: React.FC<InvoicePreviewProps> = ({ invoice, company
               </div>
 
               {/* Big Gross Total Display */}
-              <div className="flex items-stretch border-2 border-[#0f3458]">
-                <div className="bg-slate-50 text-[#0f3458] font-bold text-xs sm:text-sm px-3 py-2 flex flex-col justify-center text-center uppercase tracking-wider border-r border-[#0f3458] font-sans">
-                  <span>GROSS TOTAL</span>
-                  {invoice.discount > 0 && <span className="text-[10px] text-slate-500">(NET)</span>}
-                </div>
-                <div className="text-2xl sm:text-4xl font-extrabold text-[#0f3458] px-4 py-2 flex items-center font-mono">
-                  {formatAmount(invoice.grossTotal)}
-                </div>
-              </div>
+              <table className="border-2 border-[#0f3458] border-collapse bg-white my-0">
+                <tbody>
+                  <tr>
+                    <td className="bg-slate-50 text-[#0f3458] font-bold text-xs sm:text-sm px-4 py-3 align-middle text-center uppercase tracking-wider border-r-2 border-[#0f3458] font-sans leading-none whitespace-nowrap">
+                      <div>GROSS TOTAL</div>
+                      {invoice.discount > 0 && <div className="text-[10px] text-slate-500 mt-1">(NET)</div>}
+                    </td>
+                    <td className="text-2xl sm:text-3xl font-extrabold text-[#0f3458] px-5 py-3 align-middle text-center font-mono leading-none tracking-tight whitespace-nowrap">
+                      {formatAmount(invoice.grossTotal)}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
 
