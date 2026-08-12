@@ -9,7 +9,8 @@ import { CatalogManager } from './components/CatalogManager';
 import { InvoiceHistory } from './components/InvoiceHistory';
 import { CompanySettingsModal } from './components/CompanySettingsModal';
 import { AiScannerModal } from './components/AiScannerModal';
-import { Edit3, Eye, Save, Check } from 'lucide-react';
+import { downloadInvoiceAsPdf } from './utils/exportPdf';
+import { Edit3, Eye, Save, Check, Download, Loader2 } from 'lucide-react';
 
 const SAMPLE_INVOICE: Invoice = {
   id: 'sample-001',
@@ -75,6 +76,20 @@ export default function App() {
   const [showScanner, setShowScanner] = useState(false);
   const [activeTab, setActiveTab] = useState<'edit' | 'preview'>('edit');
   const [saveSuccessMsg, setSaveSuccessMsg] = useState(false);
+  const [isExportingPdf, setIsExportingPdf] = useState(false);
+
+  const handleTopExportPdf = async () => {
+    setIsExportingPdf(true);
+    try {
+      const filename = `${currentInvoice.documentType.replace(/\s+/g, '_')}_${currentInvoice.invoiceNumber || 'BCE'}.pdf`;
+      await downloadInvoiceAsPdf('invoice-paper-preview', filename);
+    } catch (err) {
+      console.error('PDF export error:', err);
+      alert('Failed to generate PDF. Please try again or use the Print button.');
+    } finally {
+      setIsExportingPdf(false);
+    }
+  };
 
   // Sync to Local Storage
   useEffect(() => {
@@ -249,6 +264,21 @@ export default function App() {
                 <span>Preview</span>
               </button>
             </div>
+
+            {/* Export PDF Button in Top Action Bar */}
+            <button
+              onClick={handleTopExportPdf}
+              disabled={isExportingPdf}
+              className="px-3.5 py-2 text-xs sm:text-sm font-semibold bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors flex items-center gap-1.5 shadow-sm active:scale-95 disabled:opacity-50 cursor-pointer"
+            >
+              {isExportingPdf ? (
+                <Loader2 className="w-4 h-4 animate-spin text-indigo-200" />
+              ) : (
+                <Download className="w-4 h-4" />
+              )}
+              <span className="hidden sm:inline">Download PDF</span>
+              <span className="sm:hidden">PDF</span>
+            </button>
 
             {/* Save Button */}
             <button
