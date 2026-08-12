@@ -245,9 +245,98 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
           </span>
         </div>
 
-        {/* Desktop / Table View */}
-        <div className="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
-          <table className="w-full text-left border-collapse min-w-[550px]">
+        {/* Mobile Line Items Cards (< sm) */}
+        <div className="sm:hidden space-y-3">
+          {invoice.items.map((item, index) => (
+            <div
+              key={item.id || index}
+              className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2 relative"
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-[11px] font-bold text-slate-500 uppercase">
+                  Item #{index + 1}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => removeItem(index)}
+                  className="p-1 text-slate-400 hover:text-rose-600 rounded-md"
+                  title="Remove item"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Description */}
+              <div>
+                <SmartItemInput
+                  value={item.description}
+                  onChange={(desc, price) => {
+                    updateItem(index, {
+                      description: desc,
+                      ...(price !== undefined ? { price } : {}),
+                    });
+                  }}
+                  catalog={catalog}
+                  placeholder={`Item ${index + 1} (e.g. Curtains, Voile)`}
+                />
+              </div>
+
+              {/* Qty and Price grid */}
+              <div className="grid grid-cols-2 gap-2 pt-1">
+                <div>
+                  <label className="block text-[10px] font-semibold text-slate-500 mb-0.5">
+                    QUANTITY
+                  </label>
+                  <input
+                    type="number"
+                    step="any"
+                    min="0"
+                    value={item.quantity === 0 ? '' : item.quantity}
+                    onChange={(e) => {
+                      const qty = parseFloat(e.target.value) || 0;
+                      updateItem(index, { quantity: qty });
+                    }}
+                    placeholder="1"
+                    className="w-full px-2.5 py-1.5 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-center font-medium bg-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-semibold text-slate-500 mb-0.5">
+                    PRICE (GH₵)
+                  </label>
+                  <input
+                    type="number"
+                    step="any"
+                    min="0"
+                    value={item.price === 0 ? '' : item.price}
+                    onChange={(e) => {
+                      const p = parseFloat(e.target.value) || 0;
+                      updateItem(index, { price: p });
+                    }}
+                    placeholder="0"
+                    className="w-full px-2.5 py-1.5 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-right font-medium bg-white"
+                  />
+                </div>
+              </div>
+
+              {/* Item Total */}
+              <div className="flex items-center justify-between pt-1 border-t border-slate-200/80 text-xs font-bold text-slate-800">
+                <span>TOTAL:</span>
+                <span>
+                  GH₵{' '}
+                  {(item.quantity * item.price).toLocaleString('en-US', {
+                    maximumFractionDigits: 2,
+                  })}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop / Table View (>= sm) */}
+        <div className="hidden sm:block overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
+          <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-slate-100/80 text-slate-700 text-xs font-bold border-b border-slate-200">
                 <th className="py-2.5 px-3 w-[45%]">DESCRIPTION</th>

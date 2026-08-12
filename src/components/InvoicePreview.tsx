@@ -131,29 +131,29 @@ export const InvoicePreview: React.FC<InvoicePreviewProps> = ({ invoice, company
       </div>
 
       {/* Outer Paper Frame Wrapper for precise A4 ratio look */}
-      <div className="bg-slate-200/70 p-3 sm:p-6 rounded-2xl shadow-inner overflow-x-auto flex justify-center">
+      <div className="bg-slate-200/70 p-2 sm:p-6 rounded-2xl shadow-inner flex justify-center w-full max-w-full overflow-hidden">
         {/* Printable Document Sheet matching Benjamin's Curtain Enterprise sample */}
         <div
           id={documentId}
-          className="bg-white text-slate-900 w-[210mm] min-h-[297mm] p-[12mm] sm:p-[15mm] shadow-xl rounded-none font-serif flex flex-col justify-between text-slate-900 border border-slate-300"
+          className="bg-white text-slate-900 w-full max-w-[210mm] min-h-[auto] sm:min-h-[280mm] p-4 sm:p-[15mm] shadow-xl rounded-none font-serif flex flex-col justify-between text-slate-900 border border-slate-300"
           style={{ boxSizing: 'border-box' }}
         >
           <div>
             {/* Document Header Section */}
-            <div className="flex justify-between items-start mb-6 pb-4 border-b border-slate-300">
+            <div className="flex justify-between items-start mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-slate-300">
               {/* Company Branding Left */}
-              <div className="max-w-[62%] space-y-1">
-                <h1 className="text-xl sm:text-2xl font-black tracking-tight text-[#0f3458] uppercase font-serif leading-tight">
+              <div className="max-w-[62%] space-y-0.5 sm:space-y-1">
+                <h1 className="text-lg sm:text-2xl font-black tracking-tight text-[#0f3458] uppercase font-serif leading-tight">
                   {company.name}
                 </h1>
-                <p className="text-[10px] sm:text-[11px] text-slate-600 italic font-sans leading-tight">
+                <p className="text-[9px] sm:text-[11px] text-slate-600 italic font-sans leading-tight">
                   {company.tagline}
                 </p>
-                <div className="pt-2 text-[11px] sm:text-xs font-sans text-slate-800 font-semibold space-y-0.5">
+                <div className="pt-1.5 sm:pt-2 text-[10px] sm:text-xs font-sans text-slate-800 font-semibold space-y-0.5">
                   <div>CONTACT: {company.phone}</div>
                   <div>Email:{company.email}</div>
                   {invoice.customer.name && (
-                    <div className="text-slate-900 pt-1 font-bold">
+                    <div className="text-slate-900 pt-0.5 font-bold">
                       CLIENT: <span className="underline">{invoice.customer.name}</span>
                       {invoice.customer.phone && ` (${invoice.customer.phone})`}
                     </div>
@@ -162,11 +162,11 @@ export const InvoicePreview: React.FC<InvoicePreviewProps> = ({ invoice, company
               </div>
 
               {/* Document Meta Right */}
-              <div className="text-right space-y-1">
-                <h2 className="text-lg sm:text-2xl font-extrabold text-[#5bb2c7] tracking-wider uppercase font-sans">
+              <div className="text-right space-y-0.5 sm:space-y-1">
+                <h2 className="text-base sm:text-2xl font-extrabold text-[#5bb2c7] tracking-wider uppercase font-sans">
                   {invoice.documentType}
                 </h2>
-                <div className="text-xs sm:text-sm font-sans font-bold text-slate-800 pt-2 space-y-1">
+                <div className="text-[11px] sm:text-sm font-sans font-bold text-slate-800 pt-1 sm:pt-2 space-y-0.5 sm:space-y-1">
                   <div>
                     INVOICE: <span className="font-mono">{invoice.invoiceNumber || '…………………'}</span>
                   </div>
@@ -178,41 +178,31 @@ export const InvoicePreview: React.FC<InvoicePreviewProps> = ({ invoice, company
             </div>
 
             {/* Line Items Grid Table */}
-            <div className="mb-6">
+            <div className="mb-4 sm:mb-6 overflow-x-auto">
               <table className="w-full border-collapse text-left text-xs sm:text-sm font-sans border border-slate-400">
                 <thead>
-                  <tr className="border-b border-slate-400 text-[#0f3458] font-bold uppercase tracking-wider text-[11px] sm:text-xs bg-slate-50">
-                    <th className="p-2 sm:p-2.5 border-r border-slate-400 w-[46%]">DESCRIPTION</th>
-                    <th className="p-2 sm:p-2.5 border-r border-slate-400 text-center w-[18%]">QUANTITY</th>
-                    <th className="p-2 sm:p-2.5 border-r border-slate-400 text-right w-[18%]">PRICE</th>
-                    <th className="p-2 sm:p-2.5 text-right w-[18%]">TOTAL</th>
+                  <tr className="border-b border-slate-400 text-[#0f3458] font-bold uppercase tracking-wider text-[10px] sm:text-xs bg-slate-50">
+                    <th className="p-1.5 sm:p-2.5 border-r border-slate-400 w-[46%]">DESCRIPTION</th>
+                    <th className="p-1.5 sm:p-2.5 border-r border-slate-400 text-center w-[18%]">QUANTITY</th>
+                    <th className="p-1.5 sm:p-2.5 border-r border-slate-400 text-right w-[18%]">PRICE</th>
+                    <th className="p-1.5 sm:p-2.5 text-right w-[18%]">TOTAL</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-300">
                   {invoice.items.map((item, index) => (
                     <tr key={index} className="border-b border-slate-300">
-                      <td className="p-2 sm:p-2.5 border-r border-slate-400 font-medium text-slate-800">
+                      <td className="p-1.5 sm:p-2.5 border-r border-slate-400 font-medium text-slate-800">
                         {item.description || '—'}
                       </td>
-                      <td className="p-2 sm:p-2.5 border-r border-slate-400 text-center font-mono">
+                      <td className="p-1.5 sm:p-2.5 border-r border-slate-400 text-center font-mono">
                         {item.quantity || 0}
                       </td>
-                      <td className="p-2 sm:p-2.5 border-r border-slate-400 text-right font-mono">
+                      <td className="p-1.5 sm:p-2.5 border-r border-slate-400 text-right font-mono">
                         {formatAmount(item.price)}
                       </td>
-                      <td className="p-2 sm:p-2.5 text-right font-mono font-semibold">
+                      <td className="p-1.5 sm:p-2.5 text-right font-mono font-semibold">
                         {formatAmount(item.total)}
                       </td>
-                    </tr>
-                  ))}
-
-                  {/* Empty pad rows if needed to fill document */}
-                  {Array.from({ length: Math.max(0, 8 - invoice.items.length) }).map((_, i) => (
-                    <tr key={`empty-${i}`} className="border-b border-slate-200">
-                      <td className="p-2 border-r border-slate-300 text-transparent">&nbsp;</td>
-                      <td className="p-2 border-r border-slate-300">&nbsp;</td>
-                      <td className="p-2 border-r border-slate-300">&nbsp;</td>
-                      <td className="p-2">&nbsp;</td>
                     </tr>
                   ))}
                 </tbody>
