@@ -35,13 +35,10 @@ export const Header: React.FC<HeaderProps> = ({
               B
             </div>
             <div>
-              <div className="font-bold text-white text-xs tracking-tight flex items-center gap-1">
-                BrotherBill
-                <span className="text-[9px] bg-indigo-500/30 text-indigo-200 px-1 py-0.2 rounded font-mono">
-                  v2.0
-                </span>
+              <div className="font-bold text-white text-xs tracking-tight">
+                Benjamin's Curtain Enterprise
               </div>
-              <p className="text-[9px] text-slate-400">Benjamin's Curtain Enterprise</p>
+              <p className="text-[9px] text-indigo-300">Invoice & Billing System</p>
             </div>
           </div>
 
@@ -138,13 +135,10 @@ export const Header: React.FC<HeaderProps> = ({
               B
             </div>
             <div>
-              <div className="font-bold text-white tracking-tight flex items-center gap-1.5 text-base">
-                BrotherBill
-                <span className="text-[10px] bg-indigo-500/20 text-indigo-300 px-1.5 py-0.2 rounded font-medium border border-indigo-500/30">
-                  v2.0
-                </span>
+              <div className="font-bold text-white tracking-tight text-sm leading-tight">
+                Benjamin's Curtain Enterprise
               </div>
-              <p className="text-[11px] text-slate-400">Benjamin's Curtain Enterprise</p>
+              <p className="text-[11px] text-indigo-300">Invoice & Billing System</p>
             </div>
           </div>
 
