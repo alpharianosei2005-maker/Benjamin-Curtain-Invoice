@@ -220,12 +220,12 @@ export const InvoicePreview: React.FC<InvoicePreviewProps> = ({ invoice, company
               </div>
 
               {/* Big Gross Total Display */}
-              <div className="self-end inline-flex border-2 border-[#0f3458] bg-white items-stretch h-10 sm:h-12 overflow-hidden shrink-0 max-w-full">
-                <div className="bg-slate-50 text-[#0f3458] font-bold text-[10px] sm:text-sm px-2.5 sm:px-4 flex flex-col items-center justify-center text-center uppercase tracking-wider border-r-2 border-[#0f3458] font-sans whitespace-nowrap">
-                  <span className="leading-none">GROSS TOTAL</span>
-                  {invoice.discount > 0 && <span className="text-[9px] sm:text-[10px] text-slate-500 mt-0.5 leading-none">(NET)</span>}
+              <div className="self-end inline-flex border-2 border-[#0f3458] bg-white items-stretch shrink-0 max-w-full my-0">
+                <div className="bg-slate-50 text-[#0f3458] font-bold text-[10px] sm:text-xs px-3 sm:px-4 py-2 sm:py-3 flex flex-col items-center justify-center text-center uppercase tracking-wider border-r-2 border-[#0f3458] font-sans whitespace-nowrap leading-normal">
+                  <span>GROSS TOTAL</span>
+                  {invoice.discount > 0 && <span className="text-[9px] sm:text-[10px] text-slate-500 mt-0.5">(NET)</span>}
                 </div>
-                <div className="text-lg sm:text-2xl md:text-3xl font-extrabold text-[#0f3458] px-3 sm:px-6 flex items-center justify-center font-sans tracking-tight whitespace-nowrap leading-none">
+                <div className="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#0f3458] px-4 sm:px-6 py-2 sm:py-3 flex items-center justify-center font-sans tracking-tight whitespace-nowrap leading-normal">
                   {formatAmount(invoice.grossTotal)}
                 </div>
               </div>

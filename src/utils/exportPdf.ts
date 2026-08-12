@@ -36,17 +36,21 @@ export async function downloadInvoiceAsPdf(elementId: string, filename: string =
   wrapper.style.position = 'fixed';
   wrapper.style.top = '-9999px';
   wrapper.style.left = '-9999px';
-  wrapper.style.width = '800px'; // Approx A4 width at 96 DPI
+  wrapper.style.width = '794px'; // Standard A4 portrait width at 96 DPI
+  wrapper.style.height = '1123px'; // Standard A4 portrait height at 96 DPI (210mm x 297mm)
   wrapper.style.zIndex = '-9999';
   wrapper.style.backgroundColor = '#ffffff';
   wrapper.style.padding = '0';
   wrapper.style.margin = '0';
 
   const clone = sourceElement.cloneNode(true) as HTMLElement;
-  clone.style.display = 'block';
+  clone.style.display = 'flex';
+  clone.style.flexDirection = 'column';
+  clone.style.justifyContent = 'space-between';
   clone.style.visibility = 'visible';
-  clone.style.width = '800px';
-  clone.style.minHeight = '1120px';
+  clone.style.width = '794px';
+  clone.style.height = '1123px';
+  clone.style.minHeight = '1123px';
   clone.style.boxSizing = 'border-box';
   clone.style.transform = 'none';
 
@@ -61,12 +65,14 @@ export async function downloadInvoiceAsPdf(elementId: string, filename: string =
       useCORS: true,
       logging: false,
       backgroundColor: '#ffffff',
-      width: 800,
-      windowWidth: 800,
+      width: 794,
+      height: 1123,
+      windowWidth: 794,
+      windowHeight: 1123,
       onclone: (clonedDoc) => {
         const clonedTarget = clonedDoc.getElementById(elementId);
         if (clonedTarget) {
-          clonedTarget.style.display = 'block';
+          clonedTarget.style.display = 'flex';
           clonedTarget.style.visibility = 'visible';
         }
       },
@@ -151,14 +157,20 @@ export async function downloadInvoiceAsImage(elementId: string, filename: string
   wrapper.style.position = 'fixed';
   wrapper.style.top = '-9999px';
   wrapper.style.left = '-9999px';
-  wrapper.style.width = '800px';
+  wrapper.style.width = '794px';
+  wrapper.style.height = '1123px';
   wrapper.style.zIndex = '-9999';
   wrapper.style.backgroundColor = '#ffffff';
 
   const clone = sourceElement.cloneNode(true) as HTMLElement;
-  clone.style.display = 'block';
+  clone.style.display = 'flex';
+  clone.style.flexDirection = 'column';
+  clone.style.justifyContent = 'space-between';
   clone.style.visibility = 'visible';
-  clone.style.width = '800px';
+  clone.style.width = '794px';
+  clone.style.height = '1123px';
+  clone.style.minHeight = '1123px';
+  clone.style.boxSizing = 'border-box';
 
   wrapper.appendChild(clone);
   document.body.appendChild(wrapper);
@@ -171,7 +183,10 @@ export async function downloadInvoiceAsImage(elementId: string, filename: string
       useCORS: true,
       logging: false,
       backgroundColor: '#ffffff',
-      width: 800,
+      width: 794,
+      height: 1123,
+      windowWidth: 794,
+      windowHeight: 1123,
     });
 
     const image = canvas.toDataURL('image/png');
